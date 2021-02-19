@@ -14,7 +14,7 @@ app.use(
   })
 );
 
-app.use(require("./src/routers/config"));
+app.use(require("./routes/config"));
 
 app.use((req, res, next) => {
     const error = new Error("Not found");
