@@ -77,12 +77,11 @@ class CrudControllers {
              res.status(200);
             res.json({
                 success: 1,
-                data : {...req.params}
             });
         } else {
             res.status(400);
              res.json({
-                success: {...req.params},
+                success: 0,
                 data : error.validate(result.code)  
              });
         }

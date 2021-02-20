@@ -1,11 +1,11 @@
 module.exports = require('knex')({
     client: 'mysql',
     connection: {
-        host: "127.0.0.1",
-        user: "root",
-        password: "",
-        database: "latihan",
-        timezone: "UTC",
-        charset  : 'utf8mb4_unicode_ci',
+        host: process.env.db_host,
+        user: process.env.db_user,
+        password: process.env.db_pass,
+        database: process.env.db_database,
+        timezone: process.env.db_timezone,
+        charset  : process.env.db_charset,
     }
 });

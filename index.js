@@ -1,6 +1,9 @@
+require('dotenv').config()
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const path = require("path");
 
 const PORT = process.env.PORT || 8080;
 
@@ -14,7 +17,12 @@ app.use(
   })
 );
 
+
 app.use(require("./routes/config"));
+
+
+const directory = path.join(__dirname, './files');
+app.use('/files', express.static(directory));
 
 app.use((req, res, next) => {
     const error = new Error("Not found");
