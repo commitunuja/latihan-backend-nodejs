@@ -28,6 +28,7 @@ membuat latihan
         PUT (http://localhost:8080/crud/1)
 
         paramter url : id_crud
+        
         paramter body : nama,alamat,jenis_kelamin,telepon
 
     - hapus 
