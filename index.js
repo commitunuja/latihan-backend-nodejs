@@ -4,12 +4,16 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
+const helmet = require("helmet");
+const cookieParser = require("cookie-parser");
 
 const PORT = process.env.PORT || 8080;
 
 const app = express();
 
+app.use(helmet());
 app.use(cors());
+app.use(cookieParser());
 
 app.use(
   bodyParser.urlencoded({

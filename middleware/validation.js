@@ -1,4 +1,5 @@
 const { check } = require('express-validator');
+const bcrypt = require("bcrypt");
 
 
 //membuat validasi paramter jika kosong atau tdak Sesuai dengan kententuan
@@ -15,6 +16,13 @@ exports.validate = (method) => {
 
        ];
     }
+    case "auth": {
+      return [ 
+       check('username',"username kosong").not().isEmpty(),
+       check('password',"password kosong").not().isEmpty(),
+
+      ];
+   }
   }
 };
 exports.makeid = function (length) {
@@ -26,3 +34,24 @@ exports.makeid = function (length) {
   }
   return result;
 }
+
+module.exports.encrypt = async (plainPassword) => {
+
+  let salt = await bcrypt.genSalt(10)
+  try {
+    return await bcrypt.hash(plainPassword, salt)
+  } catch (error) {
+    throw new Error(error)
+  }
+
+};
+
+module.exports.verify = async (plainPassword, hashedPassword) => {
+
+  try {
+    return await bcrypt.compare(plainPassword, hashedPassword)
+  } catch (error) {
+    throw new Error(error)
+  }
+
+};

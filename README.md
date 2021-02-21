@@ -4,7 +4,7 @@ npm init
 
 menambahkan library digunakan :
 
-npm install bcrypt body-parser cors express express-validator jsonwebtoken knex multer mysql nodemon --save
+npm install bcrypt body-parser cors express express-validator jsonwebtoken knex multer mysql nodemon dotenv helmet moment cookie-parser --save
 
 - express = framework digunakan untuk backend  di nodejs
 - body-parser = mengambil data dari form 
@@ -16,8 +16,16 @@ npm install bcrypt body-parser cors express express-validator jsonwebtoken knex 
 - multer = digunakan sebagai proses upload file
 - jsonwebtoken = membuat token authentication dan mengamankan request ilegal
 - nodemon = untuk menjalakan file index.js dengan 1 kali perintah
+- dotenv = membuat konfirgurasi
+- helmet = berjalan di framework express untuk segala akses ilegal seperti injeksi CSRF, XSS, dan lain sebagainya bisa dihandle
+- moment = membuat tanggal dan waktu 
+- cookie-parser = mengambil data dari cookie brwoser
 
-membuat latihan 
+menjalan project:
+
+npm start 
+
+membuat latihan:
 1. crud
     - simpan
         POST (http://localhost:8080/crud/)
@@ -40,8 +48,49 @@ membuat latihan
         GET (http://localhost:8080/crud/)
 
 2. upload
-    - gambar
-    - file
+    - upload gambar
+      
+      Multipart : nama_file
+      
+      POST (http://localhost:8080/upload/)
+
+    - pembaruan gambar
+
+      paramter url : id_upload
+    
+      Multipart : nama_file
+      
+      POST (http://localhost:8080/upload/1)
+
+    - tampil
+
+      GET (http://localhost:8080/upload/)
+
+    - hapus
+
+      DELETE (http://localhost:8080/upload/1)
+
+      paramter url : id_crud 
+
 3. autentikasi
     - daftar
+
+      POST (http://localhost:8080/auth/)
+
+      paramter body : username,password
+
     - login
+
+      POST (http://localhost:8080/auth/login)
+
+      paramter body : username,password
+
+    - tampil(wajib memiliki token)
+
+      GET (http://localhost:8080/auth)
+
+   - token
+
+     GET (http://localhost:8080/auth/token)
+  
+
