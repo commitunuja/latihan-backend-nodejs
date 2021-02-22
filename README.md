@@ -1,10 +1,20 @@
+# 🌐 Latihan Backend dengan Node Js (Express Js)
+
 membuat project : 
 
-npm init 
+```bash
+
+npm init
+
+```
 
 menambahkan library digunakan :
 
+```bash
+
 npm install bcrypt body-parser cors express express-validator jsonwebtoken knex multer mysql nodemon  dotenv --save
+
+```
 
 - express = framework digunakan untuk backend  di nodejs
 - body-parser = mengambil data dari form 
