@@ -35,7 +35,11 @@ npm install bcrypt body-parser cors express express-validator jsonwebtoken knex 
 
 menjalan project:
 
-npm start 
+```bash
+
+npm start
+
+```
 
 membuat latihan:
 1. crud
