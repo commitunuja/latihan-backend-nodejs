@@ -1,8 +1,8 @@
 const authModel = require("../model/auth");
 const error = require("../middleware/err");
 const validation = require("../middleware/validation");
-const jwt = require("jsonwebtoken");
-const date = require("moment");
+const token = require("./generate_token");
+
 const {
   validationResult
 } = require("express-validator");
@@ -72,34 +72,8 @@ class authontrollers {
                         username: result[0].username,
                         password: result[0].password,
                     };
-
-                    let accessToken = jwt.sign(tokenUserinfo, process.env.ACCESS_TOKEN_SECRET, {
-                        algorithm:"HS256",
-                        expiresIn: process.env.ACCESS_TOKEN_LIFE,
-                      });
-                    let refreshToken = jwt.sign(tokenUserinfo, process.env.REFRESH_TOKEN_SECRET, {
-                        algorithm:"HS256",
-                        expiresIn: process.env.REFRESH_TOKEN_LIFE,
-                      });
-        
-                    res.cookie("refreshToken", refreshToken, {
-                        secure: false,
-                        httpOnly: true,
-        
-                      });
-
-                    res.cookie("accessToken", accessToken, {
-                        secure: false,
-                        httpOnly: true,
-        
-                      });   
-                    res.status(200);
-                    res.json({
-                        accessToken:{token : accessToken,
-                        tanggal_ex : date().add(15, 'minutes').format('YYYY-MM-DD h:mm:ss') },
-                        refreshToken: {token : refreshToken,
-                        tanggal_ex : date().add(60, 'days').format('YYYY-MM-DD h:mm:ss')   },
-                    });
+                    token.create_token(result[0].id_autentikasi,tokenUserinfo,res)
+                 
                 }else{
                     res.status(400);
                     res.json({
@@ -123,43 +97,7 @@ class authontrollers {
             message: "Token tidak di temukan",
           });
         }
-    
-       await jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
-          if (err) {
-            res.status(401).json({
-              succes: "0",
-              message: "Invalid Token",
-            });
-          } else {
-            let accessToken = jwt.sign({user}, process.env.ACCESS_TOKEN_SECRET, {
-              algorithm:"HS256",
-              expiresIn: process.env.ACCESS_TOKEN_LIFE,
-            });
-            let refreshToken = jwt.sign({user}, process.env.REFRESH_TOKEN_SECRET, {
-                algorithm:"HS256",
-                expiresIn: process.env.REFRESH_TOKEN_LIFE,
-              });
-
-            res.cookie("refreshToken", refreshToken, {
-                secure: false,
-                httpOnly: true,
-
-              });
-
-            res.cookie("accessToken", accessToken, {
-                secure: false,
-                httpOnly: true,
-
-              });   
-            res.status(200);
-            res.json({
-                accessToken:{token : accessToken,
-                tanggal_ex : date().add(15, 'minutes').format('YYYY-MM-DD h:mm:ss') },
-                refreshToken: {token : refreshToken,
-                tanggal_ex : date().add(60, 'days').format('YYYY-MM-DD h:mm:ss')   },
-            });
-          }
-        });
+        token.show_token(refreshToken,res)
     }
     async coba(req, res) {
         res.status(200);
@@ -168,7 +106,21 @@ class authontrollers {
            data : "coba coba kak"  
         });
     }
-
+    async logout(req, res) {
+        const errors = validationResult(req).formatWith(errorFormatter);
+            if (!errors.isEmpty()) {
+            let errorsParam = []
+            for (let param of Object.keys(errors.errors)) {
+                errorsParam.push({ "parameter" : errors.errors[param].param, "pesan" : errors.errors[param].msg  })
+            }     
+            res.status(422).json({
+                succes: "0",
+                errors: errorsParam
+            });
+            return;
+            }
+        token.remove_token(req.body.id_autentikasi,res)
+    }
 }
 
 module.exports = new authontrollers();

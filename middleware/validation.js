@@ -23,6 +23,12 @@ exports.validate = (method) => {
 
       ];
    }
+    case "logout": {
+      return [ 
+        check('id_autentikasi',"id autentikasi kosong").not().isEmpty(),
+        check('id_autentikasi',"id autentikasi harus mengunakan angka").optional().isInt(),
+      ];
+    }
   }
 };
 exports.makeid = function (length) {

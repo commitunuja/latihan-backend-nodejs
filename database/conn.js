@@ -7,5 +7,6 @@ module.exports = require('knex')({
         database: process.env.db_database,
         timezone: process.env.db_timezone,
         charset  : process.env.db_charset,
+        dateStrings : process.env.dateStrings
     }
 });

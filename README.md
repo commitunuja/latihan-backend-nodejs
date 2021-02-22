@@ -92,5 +92,11 @@ membuat latihan:
    - token
 
      GET (http://localhost:8080/auth/token)
+
+  - logout(wajib memiliki token)
+
+    POST (http://localhost:8080/auth/logut)
+
+    paramter body : id_autentikasi
   
 

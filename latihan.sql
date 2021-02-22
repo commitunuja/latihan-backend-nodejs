@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 19, 2021 at 07:05 PM
+-- Generation Time: Feb 22, 2021 at 05:55 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -50,6 +50,20 @@ CREATE TABLE `crud` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `token`
+--
+
+CREATE TABLE `token` (
+  `id_autentikasi` int(11) NOT NULL,
+  `access_token` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ex_access_token` datetime NOT NULL,
+  `refresh_token` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ex_refresh_token` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `upload`
 --
 
@@ -74,6 +88,12 @@ ALTER TABLE `autentikasi`
 --
 ALTER TABLE `crud`
   ADD PRIMARY KEY (`id_crud`);
+
+--
+-- Indexes for table `token`
+--
+ALTER TABLE `token`
+  ADD PRIMARY KEY (`id_autentikasi`);
 
 --
 -- Indexes for table `upload`
