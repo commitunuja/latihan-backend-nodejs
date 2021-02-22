@@ -16,6 +16,8 @@ npm install bcrypt body-parser cors express express-validator jsonwebtoken knex 
 
 ```
 
+## Note :
+
 - express = framework digunakan untuk backend  di nodejs
 - body-parser = mengambil data dari form 
 - bcrypt = membuat hashing kata sandi
