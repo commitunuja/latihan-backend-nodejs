@@ -105,14 +105,17 @@ membuat latihan:
 
       GET (http://localhost:8080/auth)
 
-   - token
+    - token
 
-     GET (http://localhost:8080/auth/token)
+      GET (http://localhost:8080/auth/token)
 
-  - logout(wajib memiliki token)
+    - logout(wajib memiliki token)
 
-    POST (http://localhost:8080/auth/logut)
+      POST (http://localhost:8080/auth/logut)
 
-    paramter body : id_autentikasi
-  
+      paramter body : id_autentikasi
+
+4. Query
+    - join
+    - pagination
 
