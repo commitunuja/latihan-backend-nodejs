@@ -9,9 +9,11 @@ npm init
 ```
 
 menambahkan library digunakan :
+```bash
 
 npm install bcrypt body-parser cors express express-validator jsonwebtoken knex multer mysql nodemon dotenv helmet moment cookie-parser --save
-=======
+
+```
 
 
 ## Note :
